@@ -4,6 +4,7 @@ import it.nowak.adam.GWTManager.Model.Locations.Room;
 import it.nowak.adam.GWTManager.Model.Users.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public abstract class Device {
 
     @Id
     @GeneratedValue
+    @NotNull
     private long id ;
     private String description;
     @ManyToOne
@@ -80,16 +82,4 @@ public abstract class Device {
         this.deviceId = deviceId;
     }
 
-    @Override
-    public String toString() {
-        return "Device{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", owner=" + owner +
-                ", users=" + users +
-                ", location=" + room +
-                ", serialNumber='" + serialNumber + '\'' +
-                ", deviceId=" + deviceId +
-                '}';
-    }
 }

@@ -16,8 +16,8 @@ public class Site {
     @GeneratedValue
     private long id;
     private String name;
-    //@OneToMany
-    //Set<User> users = new HashSet<>();
+    @OneToMany
+    Set<User> users = new HashSet<>();
     @OneToMany
     Set<Building> buildings = new HashSet<>();
 
@@ -37,13 +37,13 @@ public class Site {
         this.name = name;
     }
 
-/*    public Set<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
     public void setUsers(Set<User> users) {
         this.users = users;
-    }*/
+    }
 
     public Set<Building> getBuildings() {
         return buildings;
