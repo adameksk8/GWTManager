@@ -65,5 +65,24 @@ public class User {
         return this.getClass().getName();
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Set<Device> getUsesDevices() {
+        return usesDevices;
+    }
+
+    public void setUsesDevices(Set<Device> usesDevices) {
+        this.usesDevices = usesDevices;
+    }
+
+    public Site getSite() {
+        return site;
+    }
+
+    public void setSite(Site site) {
+        this.site = site;
+    }
 }
 

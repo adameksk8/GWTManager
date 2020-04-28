@@ -16,8 +16,40 @@ public class Site {
     @GeneratedValue
     private long id;
     private String name;
-    @OneToMany
-    Set<User> users = new HashSet<>();
+    //@OneToMany
+    //Set<User> users = new HashSet<>();
     @OneToMany
     Set<Building> buildings = new HashSet<>();
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+/*    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }*/
+
+    public Set<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(Set<Building> buildings) {
+        this.buildings = buildings;
+    }
 }

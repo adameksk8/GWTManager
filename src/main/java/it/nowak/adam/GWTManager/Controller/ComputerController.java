@@ -6,19 +6,17 @@ import it.nowak.adam.GWTManager.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/v1/")
 public class ComputerController {
 
     @Autowired
     private ComputerRepository computerRepository;
-
 
     @GetMapping("/computers")
     public List<Computer> getAllComputers() {
@@ -31,6 +29,7 @@ public class ComputerController {
                 computerRepository
                         .findById(computerId)
                         .orElseThrow(() -> new ResourceNotFoundException("Computer not found on :: " + computerId));
+        System.out.println(computer);
         return ResponseEntity.ok().body(computer);
     }
 
@@ -50,14 +49,16 @@ public class ComputerController {
                         .findById(computerId)
                         .orElseThrow(() -> new ResourceNotFoundException("Computer not found on :: " + computerId));
         computer.setCpu(computerDetails.getCpu());
-        computer.setHdd(computerDetails.getHdd());
-        computer.setModel(computerDetails.getModel());
-        computer.setProducer(computerDetails.getProducer());
         computer.setDescription(computerDetails.getDescription());
         computer.setDeviceId(computerDetails.getDeviceId());
-        computer.setRam(computerDetails.getRam());
+        computer.setHdd(computerDetails.getHdd());
         computer.setIpAddress(computerDetails.getIpAddress());
         computer.setMacAddress(computerDetails.getIpAddress());
+        computer.setModel(computerDetails.getModel());
+        computer.setProducer(computerDetails.getProducer());
+        computer.setRam(computerDetails.getRam());
+        computer.setUsers(computerDetails.getUsers());
+        computer.setRoom(computerDetails.getRoom());
         //-----------------------zweryfikować i uzupełnić pozostałe atrybuty--------------------------------------------
 
         final Computer updatedComputer = computerRepository.save(computer);

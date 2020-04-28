@@ -4,6 +4,7 @@ import it.nowak.adam.GWTManager.Model.Locations.Room;
 import it.nowak.adam.GWTManager.Model.Users.User;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,9 +20,9 @@ public abstract class Device {
     @ManyToOne
     private User owner;
     @ManyToMany
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
     @ManyToOne
-    private Room location;
+    private Room room;
     @Column(name = "serial_number")
     private String serialNumber;
     private int deviceId;
@@ -39,6 +40,7 @@ public abstract class Device {
         this.description = description;
     }
 
+
     public User getOwner() {
         return owner;
     }
@@ -54,13 +56,12 @@ public abstract class Device {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
-    public Room getLocation() {
-        return location;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setLocation(Room location) {
-        this.location = location;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public String getSerialNumber() {
@@ -77,5 +78,18 @@ public abstract class Device {
 
     public void setDeviceId(int deviceId) {
         this.deviceId = deviceId;
+    }
+
+    @Override
+    public String toString() {
+        return "Device{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", owner=" + owner +
+                ", users=" + users +
+                ", location=" + room +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", deviceId=" + deviceId +
+                '}';
     }
 }
