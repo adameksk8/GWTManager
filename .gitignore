@@ -29,3 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/front/gwt-manager/node_modules
