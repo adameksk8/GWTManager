@@ -1,5 +1,6 @@
 package it.nowak.adam.GWTManager.Model.Devices;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -13,13 +14,8 @@ public abstract class NetworkDevice extends Device {
     private String macAddress;
 
     public NetworkDevice() {
+        super();
     }
-
-    /*public NetworkDevice(long id, int du, String description, User owner, Set<User> users, Room location, String serialNumber, int deviceId, String ipAddress, String macAddress) {
-        super(id, du, description, owner, users, location, serialNumber, deviceId);
-        this.ipAddress = ipAddress;
-        this.macAddress = macAddress;
-    }*/
 
     public String getIpAddress() {
         return ipAddress;

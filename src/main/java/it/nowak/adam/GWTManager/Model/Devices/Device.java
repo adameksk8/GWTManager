@@ -33,7 +33,9 @@ public abstract class Device {
     public long getId() {
         return id;
     }
-
+    public long getIdentifier() {
+        return id;
+    }
     public String getDescription() {
         return description;
     }
