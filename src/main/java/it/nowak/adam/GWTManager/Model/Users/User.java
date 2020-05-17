@@ -72,16 +72,19 @@ public class User {
         this.role = role;
     }
 
-    public Set<Device> getUsesDevices() {
-        return usesDevices;
+    public Set<Long> getUsesDevices() {
+        Set<Long> result  = new HashSet<>();
+        this.usesDevices.forEach(device -> result.add(device.getId()));
+        return result;
     }
 
     public void setUsesDevices(Set<Device> usesDevices) {
         this.usesDevices = usesDevices;
+
     }
 
-    public Site getSite() {
-        return site;
+    public long getSite() {
+        return site.getId();
     }
 
     public void setSite(Site site) {

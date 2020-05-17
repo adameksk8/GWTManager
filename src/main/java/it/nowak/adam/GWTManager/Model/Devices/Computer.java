@@ -14,6 +14,8 @@ public class Computer extends NetworkDevice {
     private String model;
     private int hdd;
 
+    private String adName;
+
     public long getId() {
         return super.getId();
     }
@@ -65,7 +67,19 @@ public class Computer extends NetworkDevice {
         this.model = model;
     }
 
-    public String getOwnerName(){return this.getOwner().getFirstName()+" "+this.getOwner().getLastName();};
+    public String getAdName() {
+        return adName;
+    }
+
+    public void setAdName(String adName) {
+        this.adName = adName;
+    }
+
+
+
+
+
+    //public String getOwnerName(){return this.getOwner().getFirstName()+" "+this.getOwner().getLastName();};
 
 
 }

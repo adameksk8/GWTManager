@@ -21,13 +21,15 @@ public abstract class Device {
     private String description;
     @ManyToOne
     private User owner;
-    @ManyToMany
-    private Set<User> users = new HashSet<>();
     @ManyToOne
     private Room room;
     @Column(name = "serial_number")
     private String serialNumber;
     private int deviceId;
+
+
+    @ManyToMany(mappedBy = "usesDevices")
+    private Set<User> usedBy = new HashSet<>();
 
 
     public long getId() {
@@ -44,7 +46,6 @@ public abstract class Device {
         this.description = description;
     }
 
-
     public User getOwner() {
         return owner;
     }
@@ -53,13 +54,6 @@ public abstract class Device {
         this.owner = owner;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
     public Room getRoom() {
         return room;
     }
@@ -82,6 +76,14 @@ public abstract class Device {
 
     public void setDeviceId(int deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public Set<User> getUsedBy() {
+        return usedBy;
+    }
+
+    public void setUsedBy(Set<User> usedBy) {
+        this.usedBy = usedBy;
     }
 
 }
