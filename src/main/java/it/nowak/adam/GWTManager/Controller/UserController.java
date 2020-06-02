@@ -1,7 +1,5 @@
 package it.nowak.adam.GWTManager.Controller;
 
-import it.nowak.adam.GWTManager.Model.Devices.Computer;
-import it.nowak.adam.GWTManager.Model.Devices.ComputerRepository;
 import it.nowak.adam.GWTManager.Model.Users.User;
 import it.nowak.adam.GWTManager.Model.Users.UserRepository;
 import it.nowak.adam.GWTManager.exception.ResourceNotFoundException;
@@ -15,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
     @Autowired

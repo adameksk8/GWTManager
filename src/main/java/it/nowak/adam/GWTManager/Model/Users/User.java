@@ -35,15 +35,12 @@ public class User {
     public long getIdentifier() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
-
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -80,7 +77,6 @@ public class User {
 
     public void setUsesDevices(Set<Device> usesDevices) {
         this.usesDevices = usesDevices;
-
     }
 
     public long getSite() {
