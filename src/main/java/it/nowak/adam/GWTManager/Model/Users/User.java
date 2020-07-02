@@ -1,38 +1,52 @@
 package it.nowak.adam.GWTManager.Model.Users;
 
 import it.nowak.adam.GWTManager.Model.Devices.Device;
+import it.nowak.adam.GWTManager.Model.Locations.Room;
 import it.nowak.adam.GWTManager.Model.Locations.Site;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+@Transactional
 @Entity
 @Table(name="USERS")
 @EntityListeners(AuditingEntityListener.class)
 public class User {
-
     @Id
     @GeneratedValue
     private long id;
-    @Column(name="first_name", nullable = false, length=30)
+    @Column
+    @NotNull
     private String firstName;
-    @Column(name="last_name", nullable = false, length=40)
+    @Column
+    @NotNull
     private String lastName;
-    @Column(name="email", nullable = false, length=50)
+    @Column
+    @NotNull
     private String email;
-    @Column(name="role", nullable = false )
+    @NotNull
+    private long pesel;
+    @Column
+    @NotNull
     private String role;
-    @ManyToMany
+    @Column
+    private Integer phone;
+    @Column
+    private Integer mobilePhone;
+    @Column
+    private Integer voip;
+    @ManyToMany(mappedBy = "usedBy")
     private Set<Device> usesDevices = new HashSet<>();
     @ManyToOne
     private Site site;
+    @ManyToOne
+    private Room room;
 
     public long getId() {
-        return id;
-    }
-    public long getIdentifier() {
         return id;
     }
     public void setId(long id) {
@@ -44,49 +58,62 @@ public class User {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getRole() {
-        return this.getClass().getName();
+    public long getPesel() {
+        return pesel;
     }
+    public void setPesel(long pesel) {
+        this.pesel = pesel;
+    }
+    public String getRole() {
+        return this.getClass().getSimpleName();
 
+    }
     public void setRole(String role) {
         this.role = role;
     }
-
+    public Integer getPhone() {
+        return phone;
+    }
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+    public Integer getMobilePhone() {
+        return mobilePhone;
+    }
+    public void setMobilePhone(Integer mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+    public Integer getVoip() {
+        return voip;
+    }
+    public void setVoip(Integer voip) {
+        this.voip = voip;
+    }
     public Set<Long> getUsesDevices() {
         Set<Long> result  = new HashSet<>();
         this.usesDevices.forEach(device -> result.add(device.getId()));
         return result;
     }
-
     public void setUsesDevices(Set<Device> usesDevices) {
         this.usesDevices = usesDevices;
     }
-
-    public long getSite() {
-        return site.getId();
+    public Site getSite() {
+        return site;
     }
-
     public void setSite(Site site) {
         this.site = site;
     }
-
-
 }
 

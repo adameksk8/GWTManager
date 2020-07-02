@@ -2,44 +2,24 @@ package it.nowak.adam.GWTManager.Model.Devices;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name="COMPUTERS")
+@Table(name="SWITCHES")
 @EntityListeners(AuditingEntityListener.class)
-public class Computer extends NetworkDevice {
+public class Switch extends NetworkDevice {
     private String producer;
     private String model;
-    private Integer hdd;
-    private Integer ram;
-    private String cpu;
     private String adName;
+    @OneToMany
+    private Set<SwitchPort> ports;
 
+    public Switch() {
+        super();
+    }
     public long getId() {
         return super.getId();
-    }
-    public Integer getHdd() {
-        return hdd;
-    }
-    public void setHdd(Integer hdd) {
-        this.hdd = hdd;
-    }
-    public Integer getRam() {
-        return ram;
-    }
-    public void setRam(Integer ram) {
-        this.ram = ram;
-    }
-    public String getCpu() {
-        return cpu;
-    }
-    public void setCpu(String cpu) {
-        this.cpu = cpu;
-    }
-    public Computer() {
-        super();
     }
     public String getProducer() {
         return producer;

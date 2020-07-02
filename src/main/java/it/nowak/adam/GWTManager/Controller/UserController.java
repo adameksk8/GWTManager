@@ -1,5 +1,6 @@
 package it.nowak.adam.GWTManager.Controller;
 
+import it.nowak.adam.GWTManager.DataGenerators.UsersGenerator;
 import it.nowak.adam.GWTManager.Model.Users.User;
 import it.nowak.adam.GWTManager.Model.Users.UserRepository;
 import it.nowak.adam.GWTManager.exception.ResourceNotFoundException;
@@ -15,12 +16,18 @@ import java.util.Map;
 @RequestMapping("/api/v1/")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
-
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/users/generate/")
+    public List<User> generateUser() {
+        UsersGenerator generator = new UsersGenerator();
+        userRepository.saveAll(generator.generateUsers(1000));
         return userRepository.findAll();
     }
 
@@ -30,7 +37,6 @@ public class UserController {
                 userRepository
                         .findById(userId)
                         .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
-        System.out.println(user);
         return ResponseEntity.ok().body(user);
     }
 
@@ -51,9 +57,10 @@ public class UserController {
         user.setFirstName(userDetails.getFirstName());
         user.setLastName(userDetails.getLastName());
         user.setEmail(userDetails.getEmail());
-        //user.setUsesDevices(userDetails.getUsesDevices());
-        //-----------------------zweryfikować i uzupełnić pozostałe atrybuty--------------------------------------------
-
+        user.setRole(userDetails.getRole());
+        user.setPhone(userDetails.getPhone());
+        user.setMobilePhone(userDetails.getMobilePhone());
+        user.setVoip(userDetails.getVoip());
         final User updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);
     }
