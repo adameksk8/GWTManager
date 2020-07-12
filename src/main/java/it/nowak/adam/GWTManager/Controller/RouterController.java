@@ -2,15 +2,15 @@ package it.nowak.adam.GWTManager.Controller;
 
 import it.nowak.adam.GWTManager.Model.Devices.Router;
 import it.nowak.adam.GWTManager.Model.Devices.RouterRepository;
-import it.nowak.adam.GWTManager.Model.Devices.Switch;
-import it.nowak.adam.GWTManager.Model.Devices.SwitchRepository;
+import it.nowak.adam.GWTManager.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -21,7 +21,51 @@ public class RouterController {
     private RouterRepository routerRepository;
 
     @GetMapping("/routers")
-    public List<Router> getAllSwitches() {
+    public List<Router> getAllRouters() {
         return routerRepository.findAll();
+    }
+    @GetMapping("/routers/{id}")
+    public ResponseEntity<Router> getRoutersById(@PathVariable(value = "id") Long routerId) throws ResourceNotFoundException {
+        Router router =
+                routerRepository
+                        .findById(routerId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Router not found on :: " + routerId));
+        return ResponseEntity.ok().body(router);
+    }
+
+    @PostMapping("/routers")
+    public Router createRouter(@Valid @RequestBody Router router) { return routerRepository.save(router);}
+
+    @PutMapping("/routers/{id}")
+    public ResponseEntity<Router> updateComputer(
+
+            @PathVariable(value = "id") Long routerId, @Valid @RequestBody Router routerDetails)
+            throws ResourceNotFoundException {
+        Router router =
+                routerRepository
+                        .findById(routerId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Router not found on :: " + routerId));
+
+        router.setDescription(router.getDescription());
+        router.setDeviceId(router.getDeviceId());
+        router.setIpAddress(router.getIpAddress());
+        router.setMacAddress(router.getMacAddress());
+        router.setModel(router.getModel());
+        router.setProducer(router.getProducer());
+        router.setRoom(router.getRoom());
+        router.setAdName(router.getAdName());
+        final Router updatedRouter = routerRepository.save(router);
+        return ResponseEntity.ok(updatedRouter);
+    }
+    @DeleteMapping("/routers/{id}")
+    public Map<String, Boolean> deleteRouter(@PathVariable(value = "id") Long routerId) throws Exception {
+        Router router =
+                routerRepository
+                        .findById(routerId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Router not found on :: " + routerId));
+        routerRepository.delete(router);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }

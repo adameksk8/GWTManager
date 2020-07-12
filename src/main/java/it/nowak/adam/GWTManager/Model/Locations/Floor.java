@@ -13,7 +13,7 @@ public class Floor {
     Building building;
     @OneToMany
     List<Room> rooms;
-    private String floor;
+    private String level;
 
     public long getId() {
         return id;
@@ -39,11 +39,11 @@ public class Floor {
         this.rooms = rooms;
     }
 
-    public String getFloor() {
-        return floor;
+    public String getLevel() {
+        return level;
     }
 
-    public void setFloor(String floor) {
-        this.floor = floor;
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

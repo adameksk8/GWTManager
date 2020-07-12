@@ -15,6 +15,7 @@ public class Site {
     @Id
     @GeneratedValue
     private long id;
+    private long siteId;
     private String name;
     @OneToMany
     Set<User> users = new HashSet<>();
@@ -27,6 +28,13 @@ public class Site {
 
     public void setId(long id) {
         this.id = id;
+    }
+    public long getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(long siteId) {
+        this.siteId = siteId;
     }
 
     public String getName() {

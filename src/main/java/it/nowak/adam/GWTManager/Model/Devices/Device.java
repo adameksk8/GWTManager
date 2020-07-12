@@ -2,12 +2,6 @@ package it.nowak.adam.GWTManager.Model.Devices;
 
 import it.nowak.adam.GWTManager.Model.Locations.Room;
 import it.nowak.adam.GWTManager.Model.Users.User;
-import it.nowak.adam.GWTManager.Model.Users.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -29,7 +23,7 @@ public abstract class Device {
     private Room room;
     @Column
     private String serialNumber;
-    @Column
+    @Column(unique = true)
     private Integer deviceId;
     @ManyToMany//(mappedBy = "usesDevices")
     private Set<User> usedBy = new HashSet<>();

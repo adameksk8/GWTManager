@@ -61,6 +61,7 @@ public class ComputerController {
         computer.setProducer(computerDetails.getProducer());
         computer.setRam(computerDetails.getRam());
         computer.setRoom(computerDetails.getRoom());
+        computer.setAdName(computerDetails.getAdName());
         final Computer updatedComputer = computerRepository.save(computer);
         return ResponseEntity.ok(updatedComputer);
     }
