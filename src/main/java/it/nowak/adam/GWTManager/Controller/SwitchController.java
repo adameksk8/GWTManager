@@ -47,15 +47,14 @@ public class SwitchController {
                         .findById(switchId)
                         .orElseThrow(() -> new ResourceNotFoundException("Switch not found on :: " + switchId));
 
-        _switch.setDescription(_switch.getDescription());
-        _switch.setDeviceId(_switch.getDeviceId());
-        _switch.setIpAddress(_switch.getIpAddress());
-        _switch.setMacAddress(_switch.getMacAddress());
-        _switch.setModel(_switch.getModel());
-        _switch.setProducer(_switch.getProducer());
-        _switch.setRoom(_switch.getRoom());
-        _switch.setAdName(_switch.getAdName());
-        final Switch updatedSwitch = switchRepository.save(_switch);
+        _switch.setDescription(switchDetails.getDescription());
+        _switch.setDeviceId(switchDetails.getDeviceId());
+        _switch.setIpAddress(switchDetails.getIpAddress());
+        _switch.setMacAddress(switchDetails.getMacAddress());
+        _switch.setModel(switchDetails.getModel());
+        _switch.setProducer(switchDetails.getProducer());
+        _switch.setRoom(switchDetails.getRoom());
+        final Switch updatedSwitch = switchRepository.save(switchDetails);
         return ResponseEntity.ok(updatedSwitch);
     }
     @DeleteMapping("/switches/{id}")

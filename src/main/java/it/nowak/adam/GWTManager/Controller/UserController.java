@@ -1,6 +1,10 @@
 package it.nowak.adam.GWTManager.Controller;
 
 import it.nowak.adam.GWTManager.DataGenerators.UsersGenerator;
+import it.nowak.adam.GWTManager.Model.Devices.Computer;
+import it.nowak.adam.GWTManager.Model.Devices.ComputerRepository;
+import it.nowak.adam.GWTManager.Model.Devices.Device;
+import it.nowak.adam.GWTManager.Model.Devices.DeviceRepository;
 import it.nowak.adam.GWTManager.Model.Users.User;
 import it.nowak.adam.GWTManager.Model.Users.UserRepository;
 import it.nowak.adam.GWTManager.exception.ResourceNotFoundException;
@@ -8,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -18,6 +24,10 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ComputerRepository computerRepository;
+    @Autowired
+    private DeviceRepository deviceRepository;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
@@ -38,6 +48,29 @@ public class UserController {
                         .findById(userId)
                         .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
         return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping("/users/{id}/computers")
+    public ResponseEntity<List<Computer>> getComputersByOwnerId(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
+        User user =
+                userRepository
+                        .findById(userId)
+                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
+        List<Computer> computers = computerRepository.findAll();
+        List<Computer>result=computers.stream().filter(computer->computer.getOwner().equals(user)).collect((Collectors.toList()));
+
+        return ResponseEntity.ok().body(result);
+    }
+    @GetMapping("/users/{id}/devices")
+    public ResponseEntity<List<Device>> getDevicesByOwnerId(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
+        User user =
+                userRepository
+                        .findById(userId)
+                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
+        List<Device> devices = deviceRepository.findAll();
+        List<Device>result=devices.stream().filter(device->device.getOwner().equals(user)).collect((Collectors.toList()));
+
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/users")

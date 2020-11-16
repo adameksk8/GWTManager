@@ -47,11 +47,12 @@ public class SiteController {
                         .findById(siteId)
                         .orElseThrow(() -> new ResourceNotFoundException("Site not found on :: " + siteId));
 
-        site.setName(site.getName());
-        site.setBuildings(site.getBuildings());
-        site.setUsers(site.getUsers());
-        final Site updatedSwitch = siteRepository.save(site);
-        return ResponseEntity.ok(updatedSwitch);
+        site.setName(siteDetails.getName());
+        site.setSiteId(siteDetails.getSiteId());
+        site.setBuildings(siteDetails.getBuildings());
+        site.setUsers(siteDetails.getUsers());
+        final Site updatedSite = siteRepository.save(site);
+        return ResponseEntity.ok(updatedSite);
     }
     @DeleteMapping("/sites/{id}")
     public Map<String, Boolean> deleteSite(@PathVariable(value = "id") Long siteId) throws Exception {

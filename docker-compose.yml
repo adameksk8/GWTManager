@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  sql-server-db:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+    - "1433:1433"
+    environment:
+      SA_PASSWORD: "@dMinistrat0r"
+      ACCEPT_EULA: "Y"
+  gwt-manager-app:
+    container_name: GWTManager_app
+    image: openjdk:8u191-jdk-alpine3.9
+    volumes:
+      - "./target/GWTManager-0.0.1-SNAPSHOT.jar"
+    command: [ 'java', '-jar', '/GWTManager-0.0.1-SNAPSHOT.jar' ]
+    ports:
+    - "8080:8080"
+

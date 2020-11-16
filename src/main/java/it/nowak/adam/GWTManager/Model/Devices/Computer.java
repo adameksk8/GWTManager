@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Computer extends NetworkDevice {
     private String producer;
     private String model;
-    private Integer hdd;
+    private String hdd;
     private Integer ram;
     private String cpu;
     private String adName;
@@ -20,10 +20,10 @@ public class Computer extends NetworkDevice {
     public long getId() {
         return super.getId();
     }
-    public Integer getHdd() {
+    public String getHdd() {
         return hdd;
     }
-    public void setHdd(Integer hdd) {
+    public void setHdd(String hdd) {
         this.hdd = hdd;
     }
     public Integer getRam() {

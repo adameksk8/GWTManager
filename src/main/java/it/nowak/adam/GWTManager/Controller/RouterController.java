@@ -46,14 +46,13 @@ public class RouterController {
                         .findById(routerId)
                         .orElseThrow(() -> new ResourceNotFoundException("Router not found on :: " + routerId));
 
-        router.setDescription(router.getDescription());
-        router.setDeviceId(router.getDeviceId());
-        router.setIpAddress(router.getIpAddress());
-        router.setMacAddress(router.getMacAddress());
-        router.setModel(router.getModel());
-        router.setProducer(router.getProducer());
-        router.setRoom(router.getRoom());
-        router.setAdName(router.getAdName());
+        router.setDescription(routerDetails.getDescription());
+        router.setDeviceId(routerDetails.getDeviceId());
+        router.setIpAddress(routerDetails.getIpAddress());
+        router.setMacAddress(routerDetails.getMacAddress());
+        router.setModel(routerDetails.getModel());
+        router.setProducer(routerDetails.getProducer());
+        router.setRoom(routerDetails.getRoom());
         final Router updatedRouter = routerRepository.save(router);
         return ResponseEntity.ok(updatedRouter);
     }

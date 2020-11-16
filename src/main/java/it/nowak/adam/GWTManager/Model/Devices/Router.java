@@ -11,7 +11,6 @@ import java.util.Set;
 public class Router extends NetworkDevice {
     private String producer;
     private String model;
-    private String adName;
     @OneToMany
     private Set<SwitchPort> ports;
 
@@ -32,11 +31,5 @@ public class Router extends NetworkDevice {
     }
     public void setModel(String model) {
         this.model = model;
-    }
-    public String getAdName() {
-        return adName;
-    }
-    public void setAdName(String adName) {
-        this.adName = adName;
     }
 }

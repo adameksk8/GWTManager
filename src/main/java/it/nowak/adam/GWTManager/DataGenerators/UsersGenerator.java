@@ -47,14 +47,14 @@ public class UsersGenerator {
         }
         return pesel;
     }
-    private Integer generatePhoneNumber(){
+    private String generatePhoneNumber(){
         Integer number=0;
         Random rand = new Random();
         for (int i=0; i<9;i++){
             number*=10;
             number+=rand.nextInt(10);
         }
-        return number;
+        return number.toString();
     }
     public User generateUser(){
         User user = new User();
@@ -76,6 +76,7 @@ public class UsersGenerator {
         }
         return result;
     }
+
     private int readUserFirstNamesFromFile(){
         Scanner scanner = null;
         ArrayList<String> tokens = new ArrayList();

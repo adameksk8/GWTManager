@@ -34,13 +34,15 @@ public class User {
     @NotNull
     private String role;
     @Column
-    private Integer phone;
+    private String phone;
     @Column
-    private Integer mobilePhone;
+    private String mobilePhone;
     @Column
-    private Integer voip;
+    private String voip;
     @ManyToMany(mappedBy = "usedBy")
     private Set<Device> usesDevices = new HashSet<>();
+    //@OneToMany (mappedBy = "owner")
+    //private Set<Device> ownsDevices = new HashSet<>();
     @ManyToOne
     private Site site;
     @ManyToOne
@@ -83,22 +85,22 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
-    public Integer getMobilePhone() {
+    public String getMobilePhone() {
         return mobilePhone;
     }
-    public void setMobilePhone(Integer mobilePhone) {
+    public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
-    public Integer getVoip() {
+    public String getVoip() {
         return voip;
     }
-    public void setVoip(Integer voip) {
+    public void setVoip(String voip) {
         this.voip = voip;
     }
     public Set<Long> getUsesDevices() {
@@ -109,6 +111,16 @@ public class User {
     public void setUsesDevices(Set<Device> usesDevices) {
         this.usesDevices = usesDevices;
     }
+
+    /*public Set<Long> getOwnsDevices() {
+        Set<Long> result  = new HashSet<>();
+        this.ownsDevices.forEach(device -> result.add(device.getId()));
+        return result;
+    }
+    public void setOwnsDevices(Set<Device> ownsDevices) {
+        this.usesDevices = ownsDevices;
+    }*/
+
     public Site getSite() {
         return site;
     }

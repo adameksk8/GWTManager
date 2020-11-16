@@ -1,6 +1,5 @@
 package it.nowak.adam.GWTManager.Model.Devices;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -16,19 +15,15 @@ public abstract class NetworkDevice extends Device {
     public NetworkDevice() {
         super();
     }
-
     public String getIpAddress() {
         return ipAddress;
     }
-
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
-
     public String getMacAddress() {
         return macAddress;
     }
-
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
     }
